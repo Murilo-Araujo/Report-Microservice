@@ -1,43 +1,43 @@
-# JSON to XLSX Microservice
+# Microserviço de JSON para XLSX
 
-A simple microservice built with Node.js and Express.js that converts JSON data to XLSX spreadsheet files.
+Um microserviço simples construído com Node.js e Express.js que converte dados JSON em arquivos de planilha XLSX.
 
-## Features
+## Funcionalidades
 
-- Accepts an array of JSON objects via a POST request
-- Converts the JSON data to an XLSX spreadsheet
-- Returns the XLSX file for download
-- Handles errors for invalid input
+* Aceita um array de objetos JSON via requisição POST
+* Converte os dados JSON em uma planilha XLSX
+* Retorna o arquivo XLSX para download
+* Lida com erros de entrada inválida
 
-## Installation
+## Instalação
 
-1. Clone this repository
-2. Install dependencies:
+1. Clone este repositório
+2. Instale as dependências:
 
 ```bash
 npm install express xlsx
 ```
 
-3. Start the server:
+3. Inicie o servidor:
 
 ```bash
 npm start
 ```
 
-The server will run on port 3000 by default. You can change this by setting the `PORT` environment variable.
+O servidor será executado na porta 3000 por padrão. Você pode alterar isso definindo a variável de ambiente `PORT`.
 
-## API Documentation
+## Documentação da API
 
-### Generate XLSX File
+### Gerar Arquivo XLSX
 
-Converts an array of JSON objects to an XLSX file.
+Converte um array de objetos JSON em um arquivo XLSX.
 
-- **URL**: `/generate-xlsx`
-- **Method**: `POST`
-- **Content-Type**: `application/json`
-- **Request Body**: An array of JSON objects where each object represents a row in the spreadsheet. The keys of the first object will be used as column headers.
+* **URL**: `/generate-xlsx`
+* **Método**: `POST`
+* **Content-Type**: `application/json`
+* **Corpo da Requisição**: Um array de objetos JSON onde cada objeto representa uma linha na planilha. As chaves do primeiro objeto serão usadas como cabeçalhos das colunas.
 
-#### Example Request
+#### Exemplo de Requisição
 
 ```bash
 curl -X POST http://localhost:3000/generate-xlsx \
@@ -50,42 +50,46 @@ curl -X POST http://localhost:3000/generate-xlsx \
   --output dados.xlsx
 ```
 
-#### Successful Response
+#### Resposta Bem-Sucedida
 
-- **Status Code**: 200 OK
-- **Content-Type**: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
-- **Content-Disposition**: `attachment; filename="dados.xlsx"`
-- **Body**: Binary XLSX file
+* **Código de Status**: 200 OK
+* **Content-Type**: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+* **Content-Disposition**: `attachment; filename="dados.xlsx"`
+* **Corpo**: Arquivo XLSX binário
 
-#### Error Responses
+#### Respostas de Erro
 
-- **Status Code**: 400 Bad Request
-  - **Content**: `{ "error": "Invalid request body. Expected a non-empty array of objects." }`
-  - **Cause**: The request body is empty, not an array, or an empty array.
+* **Código de Status**: 400 Bad Request
 
-- **Status Code**: 500 Internal Server Error
-  - **Content**: `{ "error": "Internal server error" }`
-  - **Cause**: An unexpected error occurred during processing.
+  * **Conteúdo**: `{ "error": "Invalid request body. Expected a non-empty array of objects." }`
+  * **Causa**: O corpo da requisição está vazio, não é um array ou é um array vazio.
 
-## Dependencies
+* **Código de Status**: 500 Internal Server Error
 
-- [Express.js](https://expressjs.com/) - Web framework for Node.js
-- [SheetJS (xlsx)](https://github.com/SheetJS/sheetjs) - Library for parsing and writing Excel files
+  * **Conteúdo**: `{ "error": "Internal server error" }`
+  * **Causa**: Ocorreu um erro inesperado durante o processamento.
 
-## Testing
+## Dependências
 
-A test script is included to verify the functionality of the microservice:
+* [Express.js](https://expressjs.com/) - Framework web para Node.js
+* [SheetJS (xlsx)](https://github.com/SheetJS/sheetjs) - Biblioteca para análise e escrita de arquivos Excel
 
-1. Start the server:
+## Testes
+
+Um script de teste está incluído para verificar a funcionalidade do microserviço:
+
+1. Inicie o servidor:
+
 ```bash
 npm start
 ```
 
-2. In a separate terminal, run the test script:
+2. Em um terminal separado, execute o script de teste:
+
 ```bash
 node test.js
 ```
 
-3. If successful, you should see a message indicating that the XLSX file has been saved as `test-output.xlsx`.
+3. Se for bem-sucedido, você verá uma mensagem indicando que o arquivo XLSX foi salvo como `test-output.xlsx`.
 
-The test script sends a sample JSON array to the microservice and saves the resulting XLSX file to disk.
+O script de teste envia um array JSON de exemplo para o microserviço e salva o arquivo XLSX resultante no disco.
